@@ -1,0 +1,37 @@
+{
+  "name": "jtx-people",
+  "version": "1.0.0",
+  "description": "Sistema de gestión de personas con microservicios",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run start:gateway\" \"npm run start:auth\" \"npm run start:users\" \"npm run start:employees\"",
+    "start:gateway": "cd backend/api-gateway && npm start",
+    "start:auth": "cd backend/auth-service && npm start",
+    "start:users": "cd backend/users-service && npm start",
+    "start:employees": "cd backend/employees-service && npm start",
+    "dev": "concurrently \"npm run dev:gateway\" \"npm run dev:auth\" \"npm run dev:users\" \"npm run dev:employees\"",
+    "dev:gateway": "cd backend/api-gateway && npm run dev",
+    "dev:auth": "cd backend/auth-service && npm run dev",
+    "dev:users": "cd backend/users-service && npm run dev",
+    "dev:employees": "cd backend/employees-service && npm run dev",
+    "install:all": "npm install && cd backend/auth-service && npm install && cd ../users-service && npm install && cd ../api-gateway && npm install && cd ../employees-service && npm install",
+    "seed:employees": "cd backend/employees-service && npm run seed",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "microservices",
+    "api",
+    "rest",
+    "javascript",
+    "nodejs"
+  ],
+  "author": "fherross3",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "dependencies": {
+    "mongodb": "^7.0.0",
+    "mongoose": "^9.1.5"
+  }
+}

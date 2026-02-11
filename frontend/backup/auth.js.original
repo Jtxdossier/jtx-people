@@ -1,0 +1,91 @@
+// AUTH.JS MÍNIMO Y FUNCIONAL
+console.log("✅ auth.js cargado");
+
+class AuthManager {
+    constructor() {
+        console.log("✅ AuthManager creado");
+        this.apiGateway = "http://localhost:3000/api";
+    }
+
+    async login(email, password) {
+        console.log("🔐 Login intentado:", email);
+        try {
+            const response = await fetch(this.apiGateway + "/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password })
+            });
+
+            console.log("📊 Status:", response.status);
+
+            if (!response.ok) {
+                const error = await response.json();
+                return { success: false, error: error.error };
+            }
+
+            const data = await response.json();
+            console.log("✅ Login exitoso");
+
+            // Guardar
+            localStorage.setItem("jtx_token", data.token);
+            localStorage.setItem("jtx_user", JSON.stringify(data.user));
+
+            alert("✅ ¡Login exitoso!");
+            setTimeout(() => location.reload(), 1000);
+
+            return { success: true, data };
+        } catch (error) {
+            console.error("❌ Error:", error);
+            return { success: false, error: error.message };
+        }
+    }
+}
+
+// ¡¡¡PARTE CRÍTICA - ASIGNAR A WINDOW!!!
+console.log("🔧 Asignando window.auth...");
+window.auth = new AuthManager();
+console.log("✅ window.auth asignado:", !!window.auth);
+
+// Función para formulario
+window.showLoginForm = function() {
+    console.log("📝 Mostrando formulario...");
+    const authForms = document.getElementById("auth-forms");
+    if (authForms) {
+        authForms.innerHTML = `
+            <h3>Iniciar Sesión</h3>
+            <div style="margin: 20px 0;">
+                <input type="email" id="email" value="admin@jtx.com" style="padding: 10px; margin: 5px;">
+                <input type="password" id="password" value="admin123" style="padding: 10px; margin: 5px;">
+                <button id="login-btn" style="padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px;">
+                    Iniciar Sesión
+                </button>
+            </div>
+        `;
+
+        document.getElementById("login-btn").onclick = async function() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            console.log("🖱️ Botón clickeado:", email);
+            if (window.auth && window.auth.login) {
+                const result = await window.auth.login(email, password);
+                console.log("Resultado:", result);
+            } else {
+                alert("❌ ERROR: auth no disponible");
+            }
+        };
+    }
+};
+
+// Ejecutar al cargar
+console.log("⏳ Configurando carga automática...");
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+        console.log("✅ DOM cargado");
+        window.showLoginForm();
+    });
+} else {
+    console.log("✅ DOM ya cargado");
+    setTimeout(() => window.showLoginForm(), 100);
+}
+
+console.log("✅ auth.js completamente cargado");

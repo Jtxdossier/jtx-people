@@ -1,0 +1,34 @@
+# 1. ARCHIVOS SENSIBLES (NUNCA SUBIR)
+.env
+empleados.csv
+*.pem
+*.key
+
+# 2. DEPENDENCIAS (se regeneran)
+node_modules/
+npm-debug.log*
+
+# 3. ARCHIVOS DEL SISTEMA OPERATIVO
+.DS_Store
+Thumbs.db
+*.log
+
+# 4. ARCHIVOS DE BACKUP
+*.backup
+*_backup
+Screenshot_*.jpg
+
+# 5. CARPETAS TEMPORALES
+database/
+tmp/
+# Archivos problemáticos de Windows
+nul
+
+# Archivos de resumen/documentación personal
+resumen-*.txt
+
+# Archivos de backup
+*.backup.*
+*_backup
+*.original
+old_*

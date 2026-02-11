@@ -1,0 +1,152 @@
+// Configuración principal de la aplicación
+class JTXPeopleApp {
+    constructor() {
+        this.apiGateway = 'http://localhost:3000/api';
+        this.init();
+    }
+
+    init() {
+        console.log('JTX People App inicializada');
+        this.setupEventListeners();
+        this.checkServices();
+    }
+
+    setupEventListeners() {
+        // Event listeners globales
+        document.addEventListener('click', this.handleGlobalClick.bind(this));
+    }
+
+    handleGlobalClick(e) {
+        // Manejar eventos globales aquí si es necesario
+    }
+
+    async checkServices() {
+        try {
+            const services = ['auth-service', 'users-service'];
+            
+            for (const service of services) {
+                try {
+                    let url;
+                    if (service === 'auth-service') {
+                        url = 'http://localhost:3001/health';
+                    } else if (service === 'users-service') {
+                        url = 'http://localhost:3002/health';
+                    }
+                    
+                    const response = await fetch(url);
+                    if (response.ok) {
+                        console.log(`✅ ${service} está funcionando`);
+                    }
+                } catch (error) {
+                    console.warn(`⚠️ ${service} no disponible`);
+                }
+            }
+        } catch (error) {
+            console.error('Error checking services:', error);
+        }
+    }
+}
+
+// Inicializar aplicación
+const app = new JTXPeopleApp();
+
+// Función global para mostrar notificaciones
+window.showNotification = function(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        background: ${type === 'error' ? '#e74c3c' : type === 'success' ? '#27ae60' : '#3498db'};
+        color: white;
+        border-radius: 5px;
+        z-index: 1000;
+        animation: slideIn 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+};
+
+// Añadir estilos para animaciones
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideOut {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+    
+    .btn-back {
+        background: #95a5a6;
+        margin-right: 10px;
+    }
+    
+    .btn-back:hover {
+        background: #7f8c8d;
+    }
+    
+    .btn-sm {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+        margin: 0 2px;
+    }
+    
+    .btn-danger {
+        background: #e74c3c;
+    }
+    
+    .btn-danger:hover {
+        background: #c0392b;
+    }
+    
+    .status {
+        padding: 3px 8px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+    
+    .status-active {
+        background: #27ae60;
+        color: white;
+    }
+    
+    .status-inactive {
+        background: #95a5a6;
+        color: white;
+    }
+    
+    .status-pending {
+        background: #f39c12;
+        color: white;
+    }
+`;
+document.head.appendChild(style);
+
+// Exportar para uso global
+window.app = app;

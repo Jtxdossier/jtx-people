@@ -1,0 +1,262 @@
+<div class="reports-container">
+    <div class="page-header">
+        <h2><i class="fas fa-chart-bar"></i> Reportes y Análisis</h2>
+        <div class="header-actions">
+            <button class="btn btn-primary" id="btn-generate-report">
+                <i class="fas fa-file-export"></i> Generar Reporte
+            </button>
+        </div>
+    </div>
+
+    <div class="reports-grid">
+        <div class="report-card">
+            <div class="report-header">
+                <i class="fas fa-chart-pie" style="color: #e74c3c;"></i>
+                <h3>Distribución por Departamento</h3>
+            </div>
+            <div class="report-content">
+                <div class="chart-placeholder">
+                    <i class="fas fa-chart-pie"></i>
+                    <p>Gráfico de distribución departamental</p>
+                </div>
+                <div class="chart-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">TI:</span>
+                        <span class="stat-value">25 empleados (19%)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Ventas:</span>
+                        <span class="stat-value">32 empleados (25%)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Marketing:</span>
+                        <span class="stat-value">18 empleados (14%)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="report-card">
+            <div class="report-header">
+                <i class="fas fa-chart-line" style="color: #3498db;"></i>
+                <h3>Evolución de Contrataciones</h3>
+            </div>
+            <div class="report-content">
+                <div class="chart-placeholder">
+                    <i class="fas fa-chart-line"></i>
+                    <p>Gráfico de tendencia de contrataciones</p>
+                </div>
+                <div class="chart-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Último mes:</span>
+                        <span class="stat-value">8 nuevas contrataciones</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Tasa de rotación:</span>
+                        <span class="stat-value">3.2% (baja)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="report-card">
+            <div class="report-header">
+                <i class="fas fa-money-bill-wave" style="color: #27ae60;"></i>
+                <h3>Distribución Salarial</h3>
+            </div>
+            <div class="report-content">
+                <div class="chart-placeholder">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <p>Análisis de distribución salarial</p>
+                </div>
+                <div class="chart-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Salario promedio:</span>
+                        <span class="stat-value">$3,450/mes</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Salario más alto:</span>
+                        <span class="stat-value">$8,200/mes</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Salario más bajo:</span>
+                        <span class="stat-value">$1,800/mes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="report-card">
+            <div class="report-header">
+                <i class="fas fa-user-check" style="color: #9b59b6;"></i>
+                <h3>Estadísticas de Estado</h3>
+            </div>
+            <div class="report-content">
+                <div class="chart-placeholder">
+                    <i class="fas fa-user-check"></i>
+                    <p>Estadísticas de empleados activos/inactivos</p>
+                </div>
+                <div class="chart-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Activos:</span>
+                        <span class="stat-value">124 empleados (95%)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Inactivos:</span>
+                        <span class="stat-value">6 empleados (5%)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="report-summary">
+        <h3><i class="fas fa-clipboard-list"></i> Resumen General</h3>
+        <div class="summary-grid">
+            <div class="summary-item">
+                <h4>130</h4>
+                <p>Empleados Totales</p>
+            </div>
+            <div class="summary-item">
+                <h4>8</h4>
+                <p>Departamentos</p>
+            </div>
+            <div class="summary-item">
+                <h4>$3,450</h4>
+                <p>Salario Promedio</p>
+            </div>
+            <div class="summary-item">
+                <h4>95%</h4>
+                <p>Tasa de Actividad</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.reports-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin: 30px 0;
+}
+
+.report-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.report-header {
+    padding: 20px;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.report-header h3 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 18px;
+}
+
+.report-header i {
+    font-size: 24px;
+}
+
+.report-content {
+    padding: 20px;
+}
+
+.chart-placeholder {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 40px 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.chart-placeholder i {
+    font-size: 48px;
+    color: #95a5a6;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.chart-placeholder p {
+    margin: 0;
+    color: #7f8c8d;
+    font-size: 14px;
+}
+
+.chart-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.stat-item:last-child {
+    border-bottom: none;
+}
+
+.stat-label {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.stat-value {
+    color: #7f8c8d;
+}
+
+.report-summary {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.report-summary h3 {
+    margin: 0 0 25px 0;
+    color: #2c3e50;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.summary-item {
+    text-align: center;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.summary-item h4 {
+    margin: 0 0 10px 0;
+    font-size: 32px;
+    color: #3498db;
+}
+
+.summary-item p {
+    margin: 0;
+    color: #7f8c8d;
+    font-size: 14px;
+}
+</style>

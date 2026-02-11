@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JTX People - Sistema de Gestión</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Navbar -->
+        <nav class="navbar" id="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-users"></i>
+                <h1>JTX People</h1>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <!-- Menu se cargará dinámicamente -->
+            </div>
+            <div class="user-info" id="user-info">
+                <span id="user-email">No autenticado</span>
+                <button id="logout-btn" style="display: none;">Cerrar Sesión</button>
+                <button id="login-btn">Iniciar Sesión</button>
+            </div>
+        </nav>
+        
+        <!-- Contenido principal -->
+        <main class="container" id="main-content">
+            <section class="hero">
+                <h2>Sistema de Gestión de Personas</h2>
+                <p>Gestiona usuarios, departamentos y recursos humanos de manera eficiente</p>
+                
+                <div class="auth-forms" id="auth-forms">
+                    <!-- Formularios de autenticación -->
+                </div>
+                
+                <div class="dashboard" id="dashboard" style="display: none;">
+                    <!-- Dashboard se cargará después del login -->
+                </div>
+            </section>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <p>JTX People &copy; 2024 - Sistema de Gestión</p>
+            <p>API Gateway: <span id="api-status">Desconectado</span></p>
+        </footer>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
