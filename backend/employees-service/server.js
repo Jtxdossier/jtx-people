@@ -22,12 +22,46 @@ const limiter = rateLimit({
 app.use(helmet());
 app.use(express.json());
 
+// ==============================================
+// CONFIGURACIÓN CORS PARA DESARROLLO Y PRODUCCIÓN
+// ==============================================
+
+const allowedOrigins = [
+    'http://localhost:8080',
+    'http://127.0.0.1:8080',
+    process.env.FRONTEND_URL || 'https://jtx-people.netlify.app',
+    'https://*.netlify.app'
+].filter(Boolean);
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:8080',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
+    origin: function(origin, callback) {
+        // Permitir requests sin origin (Postman, curl, etc.)
+        if (!origin) return callback(null, true);
+        
+        // Verificar si el origen está permitido
+        const isAllowed = allowedOrigins.some(allowed => {
+            if (allowed.includes('*')) {
+                const pattern = allowed.replace('*', '.*');
+                return new RegExp(pattern).test(origin);
+            }
+            return allowed === origin;
+        });
+        
+        if (isAllowed) {
+            callback(null, true);
+        } else {
+            console.warn(`🚫 CORS: Origen no permitido: ${origin}`);
+            callback(new Error(`Origen no permitido por CORS: ${origin}`));
+        }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+    optionsSuccessStatus: 200
 }));
+
+console.log('🔒 CORS configurado con orígenes:', allowedOrigins);
+
 // app.use(express.json());
 app.use(limiter);
 

@@ -1,0 +1,58 @@
+services:
+  # API GATEWAY (puerto 3000)
+  - type: web
+    name: jtx-gateway
+    env: node
+    buildCommand: cd backend/api-gateway && npm install
+    startCommand: cd backend/api-gateway && node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+    healthCheckPath: /health
+    autoDeploy: true
+
+  # AUTH SERVICE (puerto 3001)
+  - type: web
+    name: jtx-auth
+    env: node
+    buildCommand: cd backend/auth-service && npm install
+    startCommand: cd backend/auth-service && node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: JWT_SECRET
+        generateValue: true
+    autoDeploy: true
+
+  # USERS SERVICE (puerto 3002)
+  - type: web
+    name: jtx-users
+    env: node
+    buildCommand: cd backend/users-service && npm install
+    startCommand: cd backend/users-service && node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3002
+    autoDeploy: true
+
+  # EMPLOYEES SERVICE (puerto 3003)
+  - type: web
+    name: jtx-employees
+    env: node
+    buildCommand: cd backend/employees-service && npm install
+    startCommand: cd backend/employees-service && node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3003
+      - key: MONGODB_URI
+        sync: false
+    healthCheckPath: /health
+    autoDeploy: true

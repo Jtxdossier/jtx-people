@@ -25,10 +25,16 @@ app.use(cors({
 // agregado
 // Configuración de servicios (agregar employees)
 const services = {
-    auth: 'http://localhost:3001',
-    users: 'http://localhost:3002',
-    employees: 'http://localhost:3003',  // ← NUEVO
+    auth: process.env.AUTH_SERVICE_URL || 'http://localhost:3001',
+    users: process.env.USERS_SERVICE_URL || 'http://localhost:3002',
+    employees: process.env.EMPLOYEES_SERVICE_URL || 'http://localhost:3003',
 };
+
+console.log('🔧 Gateway - Servicios configurados:');
+console.log(`   Auth: ${services.auth}`);
+console.log(`   Users: ${services.users}`);
+console.log(`   Employees: ${services.employees}`);
+//cambio
 
 
 
