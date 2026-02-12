@@ -1,8 +1,9 @@
 services:
-  # API GATEWAY (puerto 3000)
+  # API GATEWAY
   - type: web
     name: jtx-gateway
     env: node
+    plan: free
     buildCommand: cd backend/api-gateway && npm install
     startCommand: cd backend/api-gateway && node server.js
     envVars:
@@ -13,10 +14,11 @@ services:
     healthCheckPath: /health
     autoDeploy: true
 
-  # AUTH SERVICE (puerto 3001)
+  # AUTH SERVICE
   - type: web
     name: jtx-auth
     env: node
+    plan: free
     buildCommand: cd backend/auth-service && npm install
     startCommand: cd backend/auth-service && node server.js
     envVars:
@@ -28,10 +30,11 @@ services:
         generateValue: true
     autoDeploy: true
 
-  # USERS SERVICE (puerto 3002)
+  # USERS SERVICE
   - type: web
     name: jtx-users
     env: node
+    plan: free
     buildCommand: cd backend/users-service && npm install
     startCommand: cd backend/users-service && node server.js
     envVars:
@@ -41,10 +44,11 @@ services:
         value: 3002
     autoDeploy: true
 
-  # EMPLOYEES SERVICE (puerto 3003)
+  # EMPLOYEES SERVICE
   - type: web
     name: jtx-employees
     env: node
+    plan: free
     buildCommand: cd backend/employees-service && npm install
     startCommand: cd backend/employees-service && node server.js
     envVars:
